@@ -1,0 +1,149 @@
+Patch to add explicit conversion that is from int to short.
+==========================================================================
+--- a/libdirac_motionest/me_utils.cpp
++++ b/libdirac_motionest/me_utils.cpp
+@@ -684,10 +684,10 @@
+         // We're doing bounds checking because we'll fall off the edge of the reference otherwise.
+ 
+        // weights for doing linear interpolation, calculated from the remainder values
+-        const ValueType linear_wts[4] = {  (2 - rmdr.x) * (2 - rmdr.y),    //tl
+-                                           rmdr.x * (2 - rmdr.y),          //tr
+-                                           (2 - rmdr.x) * rmdr.y,          //bl
+-                                           rmdr.x * rmdr.y };              //br
++        const ValueType linear_wts[4] = {  (short)( (2 - rmdr.x) * (2 - rmdr.y) ),    //tl
++                                           (short)( rmdr.x * (2 - rmdr.y) ),          //tr
++                                           (short)( (2 - rmdr.x) * rmdr.y ),          //bl
++                                           (short)( rmdr.x * rmdr.y ) };              //br
+ 
+         const int refXlen( m_ref_data.LengthX() );
+         const int refYlen( m_ref_data.LengthY() );
+@@ -848,10 +848,10 @@
+         // We're doing bounds checking because we'll fall off the edge of the reference otherwise.
+ 
+        // weights for doing linear interpolation, calculated from the remainder values
+-        const ValueType linear_wts[4] = {  (2 - rmdr.x) * (2 - rmdr.y),    //tl
+-                                           rmdr.x * (2 - rmdr.y),          //tr
+-                                           (2 - rmdr.x) * rmdr.y,          //bl
+-                                           rmdr.x * rmdr.y };              //br
++        const ValueType linear_wts[4] = {  (short)( (2 - rmdr.x) * (2 - rmdr.y) ),    //tl
++                                           (short)( rmdr.x * (2 - rmdr.y) ),          //tr
++                                           (short)( (2 - rmdr.x) * rmdr.y ),          //bl
++                                           (short)( rmdr.x * rmdr.y ) };              //br
+ 
+         const int refXlen( m_ref_data.LengthX() );
+         const int refYlen( m_ref_data.LengthY() );
+@@ -908,10 +908,10 @@
+     const int pic_next( m_pic_data.LengthX() - dparams.Xl() );// go down a row and back up
+ 
+     //weights for doing linear interpolation, calculated from the remainder values
+-    const ValueType linear_wts[4] = {  (4 - rmdr.x) * (4 - rmdr.y),    //tl
+-                                       rmdr.x * (4 - rmdr.y),          //tr
+-                                       (4 - rmdr.x) * rmdr.y,          //bl
+-                                       rmdr.x * rmdr.y };              //br
++    const ValueType linear_wts[4] = {  (short)( (4 - rmdr.x) * (4 - rmdr.y) ),    //tl
++                                       (short)( rmdr.x * (4 - rmdr.y) ),          //tr
++                                       (short)( (4 - rmdr.x) * rmdr.y ),          //bl
++                                       (short)( rmdr.x * rmdr.y ) };              //br
+ 
+     bool bounds_check( false );
+ 
+@@ -1039,10 +1039,10 @@
+     const int pic_next( m_pic_data.LengthX() - dparams.Xl() );// go down a row and back up
+ 
+     //weights for doing linear interpolation, calculated from the remainder values
+-    const ValueType linear_wts[4] = {  (4 - rmdr.x) * (4 - rmdr.y),    //tl
+-                                       rmdr.x * (4 - rmdr.y),          //tr
+-                                       (4 - rmdr.x) * rmdr.y,          //bl
+-                                       rmdr.x * rmdr.y };              //br
++    const ValueType linear_wts[4] = {  (short)( (4 - rmdr.x) * (4 - rmdr.y) ),    //tl
++                                       (short)( rmdr.x * (4 - rmdr.y) ),          //tr
++                                       (short)( (4 - rmdr.x) * rmdr.y ),          //bl
++                                       (short)( rmdr.x * rmdr.y ) };              //br
+ 
+     bool bounds_check( false );
+ 
+@@ -1403,10 +1403,10 @@
+     }
+     else
+     {
+-        const ValueType linear_wts[4] = {  (2 - rmdr1.x) * (2 - rmdr1.y),    //tl
+-                                           rmdr1.x * (2 - rmdr1.y),          //tr
+-                                           (2 - rmdr1.x) * rmdr1.y,          //bl
+-                                           rmdr1.x * rmdr1.y };              //br
++        const ValueType linear_wts[4] = {  (short)( (2 - rmdr1.x) * (2 - rmdr1.y) ),    //tl
++                                           (short)( rmdr1.x * (2 - rmdr1.y) ),          //tr
++                                           (short)( (2 - rmdr1.x) * rmdr1.y ),          //bl
++                                           (short)( rmdr1.x * rmdr1.y ) };              //br
+ 
+         // We're doing bounds checking because we'll fall off the edge of the reference otherwise.
+         for( int y=dparams.Yl(), ry=ref_start1.y, by=BChk(ry,m_ref_data1.LengthY()), by1=BChk(ry+1,m_ref_data1.LengthY()); 
+@@ -1513,10 +1513,10 @@
+     }
+     else
+     {
+-        const ValueType linear_wts[4] = {  (2 - rmdr2.x) * (2 - rmdr2.y),    //tl
+-                                           rmdr2.x * (2 - rmdr2.y),          //tr
+-                                           (2 - rmdr2.x) * rmdr2.y,          //bl
+-                                           rmdr2.x * rmdr2.y };              //br
++        const ValueType linear_wts[4] = {  (short)( (2 - rmdr2.x) * (2 - rmdr2.y) ),    //tl
++                                           (short)( rmdr2.x * (2 - rmdr2.y) ),          //tr
++                                           (short)( (2 - rmdr2.x) * rmdr2.y ),          //bl
++                                           (short)( rmdr2.x * rmdr2.y ) };              //br
+ 
+         // We're doing bounds checking because we'll fall off the edge of the reference otherwise.
+         for( int y=dparams.Yl(), ry=ref_start2.y, by=BChk(ry,m_ref_data2.LengthY()),by1=BChk(ry+1,m_ref_data2.LengthY()); 
+@@ -1564,14 +1564,14 @@
+     const MVector rmdr2( mv2.x & 3 , mv2.y & 3 );
+ 
+     //weights for doing linear interpolation, calculated from the remainder values
+-    const ValueType linear_wts1[4] = {  (4 - rmdr1.x) * (4 - rmdr1.y),    //tl
+-                                       rmdr1.x * (4 - rmdr1.y),          //tr
+-                                       (4 - rmdr1.x) * rmdr1.y,          //bl
+-                                       rmdr1.x * rmdr1.y };              //br
+-    const ValueType linear_wts2[4] = {  (4 - rmdr2.x) * (4 - rmdr2.y),    //tl
+-                                       rmdr2.x * (4 - rmdr2.y),          //tr
+-                                       (4 - rmdr2.x) * rmdr2.y,          //bl
+-                                       rmdr2.x * rmdr2.y };              //br
++    const ValueType linear_wts1[4] = {  (short)( (4 - rmdr1.x) * (4 - rmdr1.y) ),    //tl
++                                       (short)( rmdr1.x * (4 - rmdr1.y) ),          //tr
++                                       (short)( (4 - rmdr1.x) * rmdr1.y ),          //bl
++                                       (short)( rmdr1.x * rmdr1.y ) };              //br
++    const ValueType linear_wts2[4] = {  (short)( (4 - rmdr2.x) * (4 - rmdr2.y) ),    //tl
++                                       (short)( rmdr2.x * (4 - rmdr2.y) ),          //tr
++                                       (short)( (4 - rmdr2.x) * rmdr2.y ),          //bl
++                                       (short)( rmdr2.x * rmdr2.y ) };              //br
+ 
+     //Where to start in the upconverted images
+     const ImageCoords ref_start1( ( dparams.Xp()<<1 ) + roundvec1.x ,( dparams.Yp()<<1 ) + roundvec1.y );
+--- a/libdirac_common/mot_comp.cpp
++++ b/libdirac_common/mot_comp.cpp
+@@ -1064,10 +1064,10 @@
+         // We're doing bounds checking because we'll fall off the edge of the reference otherwise.
+
+         //weights for doing linear interpolation, calculated from the remainder values
+-        const ValueType linear_wts[4] = {  (2 - rmdr.x) * (2 - rmdr.y),    //tl
+-                                           rmdr.x * (2 - rmdr.y),          //tr
+-                                           (2 - rmdr.x) * rmdr.y,          //bl
+-                                           rmdr.x * rmdr.y };              //br
++        const ValueType linear_wts[4] = {  (short)( (2 - rmdr.x) * (2 - rmdr.y) ),    //tl
++                                           (short)( rmdr.x * (2 - rmdr.y) ),          //tr
++                                           (short)( (2 - rmdr.x) * rmdr.y ),          //bl
++                                           (short)( rmdr.x * rmdr.y ) };              //br
+
+
+        for(int c = 0, uY = ref_start.y,BuY=BChk(uY,trueRefYlen),BuY1=BChk(uY+1,trueRefYlen);
+@@ -1116,10 +1116,10 @@
+     const ImageCoords ref_start( ( start_pos.x<<1 ) + roundvec.x ,( start_pos.y<<1 ) + roundvec.y );
+
+     //weights for doing linear interpolation, calculated from the remainder values
+-    const ValueType linear_wts[4] = {  (4 - rmdr.x) * (4 - rmdr.y),    //tl
+-                                    rmdr.x * (4 - rmdr.y),          //tr
+-                                    (4 - rmdr.x) * rmdr.y,          //bl
+-                                    rmdr.x * rmdr.y };              //br
++    const ValueType linear_wts[4] = {  (short)( (4 - rmdr.x) * (4 - rmdr.y) ),    //tl
++                                    (short)( rmdr.x * (4 - rmdr.y) ),          //tr
++                                    (short)( (4 - rmdr.x) * rmdr.y ),          //bl
++                                    (short)( rmdr.x * rmdr.y ) };              //br
+
+     //An additional stage to make sure the block to be copied does not fall outside
+     //the reference image.

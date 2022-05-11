@@ -1064,10 +1064,10 @@ void MotionCompensator_QuarterPixel::BlockPixelPred(
         // We're doing bounds checking because we'll fall off the edge of the reference otherwise.
 
         //weights for doing linear interpolation, calculated from the remainder values
-        const ValueType linear_wts[4] = {  (2 - rmdr.x) * (2 - rmdr.y),    //tl
-                                           rmdr.x * (2 - rmdr.y),          //tr
-                                           (2 - rmdr.x) * rmdr.y,          //bl
-                                           rmdr.x * rmdr.y };              //br
+        const ValueType linear_wts[4] = {  (short)( (2 - rmdr.x) * (2 - rmdr.y) ),    //tl
+                                           (short)( rmdr.x * (2 - rmdr.y) ),          //tr
+                                           (short)( (2 - rmdr.x) * rmdr.y ),          //bl
+                                           (short)( rmdr.x * rmdr.y ) };              //br
 
 
        for(int c = 0, uY = ref_start.y,BuY=BChk(uY,trueRefYlen),BuY1=BChk(uY+1,trueRefYlen);
@@ -1116,10 +1116,10 @@ void MotionCompensator_EighthPixel::BlockPixelPred(
     const ImageCoords ref_start( ( start_pos.x<<1 ) + roundvec.x ,( start_pos.y<<1 ) + roundvec.y );
 
     //weights for doing linear interpolation, calculated from the remainder values
-    const ValueType linear_wts[4] = {  (4 - rmdr.x) * (4 - rmdr.y),    //tl
-                                    rmdr.x * (4 - rmdr.y),          //tr
-                                    (4 - rmdr.x) * rmdr.y,          //bl
-                                    rmdr.x * rmdr.y };              //br
+    const ValueType linear_wts[4] = {  (short)( (4 - rmdr.x) * (4 - rmdr.y) ),    //tl
+                                    (short)( rmdr.x * (4 - rmdr.y) ),          //tr
+                                    (short)( (4 - rmdr.x) * rmdr.y ),          //bl
+                                    (short)( rmdr.x * rmdr.y ) };              //br
 
     //An additional stage to make sure the block to be copied does not fall outside
     //the reference image.
